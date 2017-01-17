@@ -1,8 +1,16 @@
-const LOAD_MANGAS = 'LOAD_MANGAS';
+export const LOAD_MANGAS = 'LOAD_MANGAS';
+export const SELECT_MANGA = 'SELECT_MANGA';
 
 export const loadMangas = () => {
   return {
     type: LOAD_MANGAS
+  }
+}
+
+export const selectManga = (manga) => {
+  return {
+    type: SELECT_MANGA,
+    manga
   }
 }
 

@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 
 import CircularProgress from 'material-ui/CircularProgress';
 import { List, ListItem } from 'material-ui/List';
 
-import * as MangaActions from '../actions/MangaActions'
+import * as MangaActions from '../actions/Manga'
 
 export class Manga extends Component {
   componentDidMount() {
     this.props.loadMangas();
   }
   render() {
-    const { isShow, mangas } = this.props;
+    const { isLoading, mangas, selectManga } = this.props;
     return (
-      <div>
+      <div id="manga-list" className={isLoading ? "loading" : ""}>
         <List>
           {
-            isShow ? ( 
+            isLoading ? ( 
               <div id="loader">
                 <CircularProgress size={60} thickness={7} color="#64FFDA"/> 
               </div>
             ) :
             mangas.map((manga) => (
-              <ListItem primaryText={manga.title} key={manga._id}></ListItem>
+              <ListItem primaryText={manga.title} key={manga._id} containerElement={<Link to="/"/>} />
             ))
           }
         </List>
@@ -34,7 +35,7 @@ export class Manga extends Component {
 
 function mapStateToProps(state) {
   return {
-    isShow: state.manga.isLoading,
+    isLoading: state.manga.isLoading,
     mangas: state.manga.mangas
   }
 }

@@ -24,7 +24,6 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        // https://github.com/jtangelder/sass-loader
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass'],
       },
