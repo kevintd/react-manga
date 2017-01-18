@@ -11,3 +11,9 @@ export const fetchChapters = (mangaName) => {
     return response.json().then(data => data);
   })
 }
+
+export const fetchChapter = (mangaName, chapterName) => {
+  return fetch (`http://localhost:10000/api/manga/${mangaName}/${chapterName}`).then(response => {
+    return response.json().then(data =>data);
+  });
+}

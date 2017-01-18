@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Chip from 'material-ui/Chip';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
@@ -28,7 +29,8 @@ const Manga = ({ selectedManga, chapters }) => (
       chapters ? ( 
         <List>
         {
-          chapters.map((chapter) => <ListItem key={chapter._id} primaryText={chapter.title} />)  
+          chapters.map((chapter) => <ListItem key={chapter._id} primaryText={chapter.title} 
+            containerElement={<Link to={"/manga/" + selectedManga.name + "/" + chapter.chapterName} />}/>)  
         } 
         </List>
       ) : (

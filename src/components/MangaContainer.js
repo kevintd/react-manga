@@ -10,7 +10,7 @@ import Manga from './Manga';
 
 export class MangaContainer extends Component {
   render() {
-    let { selectedManga, location, mangas, chapters } = this.props;
+    let { selectedManga, location, mangas, chapters, currentChapter } = this.props;
 
     return (
       <div className="manga-container">
@@ -21,33 +21,44 @@ export class MangaContainer extends Component {
             filter={AutoComplete.caseInsensitiveFilter}
             fullWidth={true}/>
         </div>
-        
-      {
-        selectedManga ? (
-          <Manga selectedManga={selectedManga} chapters={chapters}/>
-        ) : (
-          <MangaList {...this.props} />
-        )
-      }
+        {
+          currentChapter ? (
+            currentChapter.imgs.map((img, index) => <img src={img} width="100%" key={index} />)
+          ) : 
+          (
+            selectedManga ? (
+              <Manga selectedManga={selectedManga} chapters={chapters}/>
+            ) : (
+              <MangaList {...this.props} />
+            )
+          )
+        }
+      
       </div>
     )
   }
 
   componentDidMount() {
-    let { loadMangas, params, loadChapters  } = this.props;
+    let { loadMangas, params, loadChapters, readChapter  } = this.props;
     loadMangas();
     if (params.mangaName) {
       loadChapters(params.mangaName);
+      if (params.chapterName) {
+        readChapter(params.mangaName, params.chapterName)
+      }
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    let { isLoading, selectManga, mangas, params, selectedManga, loadChapters} = nextProps;
+    let { isLoading, selectManga, mangas, params, selectedManga, loadChapters, readChapter } = nextProps;
     if (params.mangaName && !isLoading && typeof selectedManga === 'undefined') {
       selectManga(mangas.find((manga) => manga.name == params.mangaName));
     }
-    if (this.props.params.mangaName !== nextProps.params.mangaName) {
+    if (this.props.params.mangaName !== params.mangaName) {
       loadChapters(params.mangaName);
+    }
+    if (params.chapterName && this.props.params.chapterName !== params.chapterName) {
+        readChapter(params.mangaName, params.chapterName)
     }
   }
 }
@@ -55,6 +66,7 @@ export class MangaContainer extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     mangas: state.manga.mangas,
+    currentChapter: state.manga.currentChapter,
     chapters: state.manga.chapters,
     isLoading: state.manga.isLoading,
     selectedManga: state.manga.selectedManga,
