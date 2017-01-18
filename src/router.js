@@ -12,6 +12,7 @@ const router = (
       <IndexRoute component={MangaContainer}/>
       <Route path="/manga" component={MangaContainer} />
       <Route path="/manga/:mangaName" component={MangaContainer} />
+      <Route path="/manga/:mangaName/:chapterName" component={MangaContainer} />
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>
