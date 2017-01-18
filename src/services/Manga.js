@@ -8,6 +8,6 @@ export const fetchMangas = () => {
 
 export const fetchChapters = (mangaName) => {
   return fetch(`http://localhost:10000/api/manga/${mangaName}`).then(response => {
-    return response.json().then(data => console.log(data));
+    return response.json().then(data => data);
   })
 }

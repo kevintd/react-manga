@@ -9,14 +9,15 @@ const initialState = {
 const MangaReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_MANGAS:
-    case LOAD_CHAPTERS:
       return { ...state, isLoading: true }
+    case LOAD_CHAPTERS:
+      return state;
     case SELECT_MANGA:
       return { ...state, selectedManga: action.manga }
     case CHAPTERS_FETCHED:
-      return { ...state, chapters: action.chapters, isLoading: false }
+      return { ...state, chapters: action.chapters }
     case 'MANGAS_LOADED':
-      return { isLoading: false, mangas: action.mangas };
+      return { ...state, isLoading: false, mangas: action.mangas };
     default: return state;
   }
 }

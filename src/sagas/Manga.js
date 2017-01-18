@@ -16,6 +16,7 @@ export function* loadMangas() {
 export function* loadChapters(action) {
   try {
     const chapters = yield call(fetchChapters, action.mangaName);
+    console.log(chapters);
     yield put({ type: CHAPTERS_FETCHED, chapters });
   } catch (error) {
 

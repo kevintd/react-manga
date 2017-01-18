@@ -34,17 +34,20 @@ export class MangaContainer extends Component {
   }
 
   componentDidMount() {
-    let { loadMangas  } = this.props;
+    let { loadMangas, params, loadChapters  } = this.props;
     loadMangas();
-    
+    if (params.mangaName) {
+      loadChapters(params.mangaName);
+    }
   }
+
   componentWillReceiveProps(nextProps) {
-    let { isLoading, selectManga, mangas, params, selectedManga , loadChapters, chapters } = nextProps;
+    let { isLoading, selectManga, mangas, params, selectedManga, loadChapters} = nextProps;
     if (params.mangaName && !isLoading && typeof selectedManga === 'undefined') {
       selectManga(mangas.find((manga) => manga.name == params.mangaName));
     }
-    if (selectedManga) {
-      loadChapters(selectedManga.name);
+    if (this.props.params.mangaName !== nextProps.params.mangaName) {
+      loadChapters(params.mangaName);
     }
   }
 }
