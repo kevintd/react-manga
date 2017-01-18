@@ -12,7 +12,7 @@ const MangaList = ({ mangas, isLoading, selectManga }) => (
     {
       isLoading ? ( 
         <div id="loader">
-          <CircularProgress size={60} thickness={7} color="#64FFDA"/> 
+          <CircularProgress size={60} thickness={7} color="#00E5FF"/> 
           </div>
       ) : 
       mangas.map((manga) => (

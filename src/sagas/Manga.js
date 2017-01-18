@@ -1,4 +1,6 @@
-import { fetchMangas } from '../services/Manga';
+import { fetchMangas, fetchChapters } from '../services/Manga';
+import { CHAPTERS_FETCHED } from '../actions/MangaActions';
+
 import { put, call } from 'redux-saga/effects';
 
 export function* loadMangas() {
@@ -9,4 +11,13 @@ export function* loadMangas() {
     
   }
   
+}
+
+export function* loadChapters(action) {
+  try {
+    const chapters = yield call(fetchChapters, action.mangaName);
+    yield put({ type: CHAPTERS_FETCHED, chapters });
+  } catch (error) {
+
+  }
 }
