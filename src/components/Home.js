@@ -4,7 +4,7 @@ import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNaviga
 import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
-import Manga from './Manga';
+import MangaContainer from './MangaContainer';
 
 const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
 const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
@@ -13,8 +13,8 @@ const nearbyIcon = <IconLocationOn />;
 
 
 export default class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selectedIndex: 0
     }
@@ -26,9 +26,10 @@ export default class Home extends Component {
   }
 
   render() {
+    let { mangaName } = this.props.params;
     return (
       <div id="home">
-        <Manga />
+        <MangaContainer />
         <div id="bottom-nav">
           <Paper zDepth={1}>
             <BottomNavigation selectedIndex={this.state.selectedIndex}>

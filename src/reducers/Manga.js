@@ -1,4 +1,4 @@
-import { LOAD_MANGAS, SELECT_MANGA } from '../actions/Manga';
+import { LOAD_MANGAS, SELECT_MANGA } from '../actions/MangaActions';
 
 const initialState = {
   isLoading: false,
