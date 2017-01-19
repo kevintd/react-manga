@@ -11,7 +11,7 @@ const MangaReducer = (state = initialState, action) => {
     case LOAD_MANGAS:
       return { ...state, isLoading: true }
     case LOAD_CHAPTERS:
-      return state;
+      return { ...state, currentChapter: null };
     case READ_CHAPTER:
       return { ...state }
     case SELECT_MANGA:

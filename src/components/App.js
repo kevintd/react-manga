@@ -22,6 +22,9 @@ const muiTheme = getMuiTheme({
   },
   card: {
     fontWeight: 300
+  },
+  floatingActionButton: {
+    color: '#00E5FF'
   }
 })
 export default class App extends React.Component {

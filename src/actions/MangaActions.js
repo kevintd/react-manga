@@ -4,6 +4,7 @@ export const SELECT_MANGA = 'SELECT_MANGA';
 export const READ_CHAPTER = 'READ_CHAPTER';
 export const CHAPTERS_FETCHED = 'CHAPTERS_FETCHED';
 export const CHAPTER_FETCHED = 'CHAPTER_FETCHED';
+export const FIND_MANGA = 'FIND_MANGA';
 
 export const loadMangas = () => {
   return {
@@ -30,6 +31,13 @@ export const selectManga = (manga) => {
   return {
     type: SELECT_MANGA,
     manga
+  }
+}
+
+export const findManga = (mangaTitle) => {
+  return {
+    type: FIND_MANGA,
+    mangaTitle
   }
 }
 
