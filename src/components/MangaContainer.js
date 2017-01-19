@@ -19,6 +19,7 @@ export class MangaContainer extends Component {
     this.handleNewRequest = this.handleNewRequest.bind(this)
     this.handleUpdateInput = this.handleUpdateInput.bind(this)
     this.handleScrollTop = this.handleScrollTop.bind(this)
+    this.handleChangeChapter = this.handleChangeChapter.bind(this)
     this.state = {
       search: ''
     }
@@ -42,6 +43,14 @@ export class MangaContainer extends Component {
     }
   }
 
+  handleChangeChapter(event, index, value) {
+    let { chapters, currentChapter, selectedManga } = this.props;
+    let oldIndex = chapters.findIndex((chapter) => chapter.chapterName === currentChapter.chapterName);
+    if (index !== oldIndex) {
+      browserHistory.push(`/manga/${chapters[index].manga}/${chapters[index].chapterName}`)
+    }
+  }
+
   render() {
     let { selectedManga, location, mangas, chapters, currentChapter, findManga } = this.props;
 
@@ -60,7 +69,7 @@ export class MangaContainer extends Component {
         {
           currentChapter ? (
             <div>
-            <MangaReader currentChapter={currentChapter} />
+            <MangaReader currentChapter={currentChapter} chapters={chapters} handleChangeChapter={this.handleChangeChapter}/>
               <FloatingActionButton mini={true} 
                 style={{ position: 'fixed', bottom: 10, right: 10 }}
                 onClick={this.handleScrollTop} >
