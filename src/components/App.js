@@ -48,9 +48,12 @@ export default class App extends React.Component {
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             onLeftIconButtonTouchTap={this.handleToogle}
             />
-          <Drawer open={this.state.open} docked={false} width={200}>
-            <MenuItem>Menu Item</MenuItem>
-            <MenuItem>Menu Item 2</MenuItem>
+          <Drawer open={this.state.open} docked={false} width={200} onRequestChange={(open) => this.setState({open})}>
+            <AppBar title="Pamu" />
+            <MenuItem>Manga</MenuItem>
+            <MenuItem>Anime</MenuItem>
+            <MenuItem>EDM</MenuItem>
+            <MenuItem>Truyen Chu</MenuItem>
           </Drawer>
           {this.props.children}
         </div>

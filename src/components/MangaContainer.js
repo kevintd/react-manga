@@ -6,6 +6,8 @@ import { browserHistory } from 'react-router';
 import AutoComplete from 'material-ui/AutoComplete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import NavigationArrowUpward from 'material-ui/svg-icons/navigation/arrow-upward';
+import NavigationArrowForward  from 'material-ui/svg-icons/navigation/arrow-forward';
+import NavigationArrowBack  from 'material-ui/svg-icons/navigation/arrow-back';
 
 import * as MangaActions from '../actions/MangaActions';
 
@@ -16,10 +18,12 @@ import Manga from './Manga';
 export class MangaContainer extends Component {
   constructor() {
     super();
-    this.handleNewRequest = this.handleNewRequest.bind(this)
-    this.handleUpdateInput = this.handleUpdateInput.bind(this)
-    this.handleScrollTop = this.handleScrollTop.bind(this)
-    this.handleChangeChapter = this.handleChangeChapter.bind(this)
+    this.handleNewRequest = this.handleNewRequest.bind(this);
+    this.handleUpdateInput = this.handleUpdateInput.bind(this);
+    this.handleScrollTop = this.handleScrollTop.bind(this);
+    this.handleChangeChapter = this.handleChangeChapter.bind(this);
+    this.handleNextChapter = this.handleNextChapter.bind(this);
+    this.handlePrevChapter = this.handlePrevChapter.bind(this);
     this.state = {
       search: ''
     }
@@ -51,6 +55,22 @@ export class MangaContainer extends Component {
     }
   }
 
+  handlePrevChapter() {
+    let { chapters, currentChapter } = this.props;
+    let index = chapters.findIndex((chapter) => chapter.chapterName === currentChapter.chapterName);
+    if ( index + 1 < chapters.length ) {
+      browserHistory.push(`/manga/${chapters[index+1].manga}/${chapters[index + 1].chapterName}`)
+    }
+  }
+
+  handleNextChapter() {
+    let { chapters, currentChapter } = this.props;
+    let index = chapters.findIndex((chapter) => chapter.chapterName === currentChapter.chapterName);
+    if ( index > 0) {
+      browserHistory.push(`/manga/${chapters[index-1].manga}/${chapters[index-1].chapterName}`)
+    }
+  }
+
   render() {
     let { selectedManga, location, mangas, chapters, currentChapter, findManga } = this.props;
 
@@ -74,6 +94,18 @@ export class MangaContainer extends Component {
                 style={{ position: 'fixed', bottom: 10, right: 10 }}
                 onClick={this.handleScrollTop} >
                 <NavigationArrowUpward />
+              </FloatingActionButton>
+              <FloatingActionButton mini={true} 
+                style={{ position: 'fixed', bottom: 10, left: 10 }}
+                disabled={ chapters.findIndex((chapter) => chapter.chapterName === currentChapter.chapterName) + 1 === chapters.length}
+                onClick={this.handlePrevChapter} >
+                <NavigationArrowBack />
+              </FloatingActionButton>
+              <FloatingActionButton mini={true} 
+                style={{ position: 'fixed', bottom: 10, left: 60 }}
+                disabled={ chapters.findIndex((chapter) => chapter.chapterName === currentChapter.chapterName) === 0}
+                onClick={this.handleNextChapter} >
+                <NavigationArrowForward  />
               </FloatingActionButton>
             </div>
           ) : 
