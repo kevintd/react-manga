@@ -19,6 +19,9 @@ const muiTheme = getMuiTheme({
   },
   textField: {
     focusColor: '#00E5FF'
+  },
+  card: {
+    fontWeight: 300
   }
 })
 export default class App extends React.Component {
@@ -38,7 +41,7 @@ export default class App extends React.Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={style}>
-          <AppBar title="Panga"
+          <AppBar title="Pamu"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             onLeftIconButtonTouchTap={this.handleToogle}
             />

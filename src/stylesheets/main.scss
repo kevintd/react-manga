@@ -50,8 +50,15 @@ body {
     flex-direction: row;
 }
 .manga-thumb {
-    flex: 1 0 25%;
+    // flex: 1 0 25%;
 }
 .manga-description {
-    flex: 1
+    display: flex;
+    padding: 0.2rem 0.5rem;
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.manga-genre {
+    padding: 0 0.2rem;
 }

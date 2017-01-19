@@ -10,15 +10,17 @@ const Manga = ({ selectedManga, chapters }) => (
   <div className="manga">
     <div className="manga-info">
       <div className="manga-thumb">
-        <Card>
-          <CardMedia overlay={<CardTitle title={selectedManga.title} />}>
-            <img src={selectedManga.thumb}/>
-          </CardMedia>
-        </Card>
+        <div>
+          <Card>
+            <CardMedia overlay={<CardTitle subtitle={selectedManga.title} />}>
+              <img src={selectedManga.thumb}/>
+            </CardMedia>
+          </Card>
+        </div>
       </div>
       <div className="manga-description">
       {
-        selectedManga.genres.map((genre, index) => <Chip key={index}  >{ genre }</Chip>)
+        selectedManga.genres.map((genre, index) => <div  key={index} className="manga-genre"><Chip  >{ genre }</Chip></div>)
       }
       </div>
     </div>
