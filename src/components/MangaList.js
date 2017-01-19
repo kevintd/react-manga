@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
 import { List, ListItem } from 'material-ui/List';
 
@@ -16,12 +17,14 @@ const MangaList = ({ mangas, isLoading, selectManga }) => (
           </div>
       ) : 
       mangas.map((manga) => (
-        <ListItem 
-          primaryText={manga.title} 
-          key={manga._id} 
-          containerElement={<Link to={"/manga/" + manga.name} />} 
-          onClick={() => selectManga(manga)}
-        />
+        <div className="manga-list-item"  key={manga._id}>
+          <img src={manga.thumb} height="70px"/>
+          <ListItem 
+            primaryText={manga.title} 
+            containerElement={<Link to={"/manga/" + manga.name} />} 
+            onClick={() => selectManga(manga)}
+          />
+        </div>
       ))
     }
     </List>
